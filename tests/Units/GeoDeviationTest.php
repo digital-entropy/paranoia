@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Units;
 
 use Addeeandra\Paranoia\Events\GeoDeviationDetected;
-use Addeeandra\Paranoia\Middlewares\Session\GeoDeviationMiddleware;
+use Addeeandra\Paranoia\Middlewares\GeoDeviationMiddleware;
 use Addeeandra\Paranoia\Services\IpInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;

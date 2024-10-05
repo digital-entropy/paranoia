@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Addeeandra\Paranoia\Middlewares\Session;
+namespace Addeeandra\Paranoia\Middlewares;
 
 use Addeeandra\Paranoia\Events\GeoDeviationDetected;
 use Addeeandra\Paranoia\Services\IpInfo;

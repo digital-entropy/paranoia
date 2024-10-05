@@ -1,12 +1,16 @@
 {
-    "name": "nunomaduro/skeleton-php",
-    "description": "A skeleton repository for my packages",
-    "keywords": ["php", "skeleton", "package"],
+    "name": "addeeandra/paranoia",
+    "description": "An abundant security for Laravel",
+    "keywords": [
+        "php",
+        "laravel",
+        "security"
+    ],
     "license": "MIT",
     "authors": [
         {
-            "name": "Nuno Maduro",
-            "email": "enunomaduro@gmail.com"
+            "name": "Aditya Chandra",
+            "email": "addeeandra@gmail.com"
         }
     ],
     "require": {
@@ -22,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NunoMaduro\\SkeletonPhp\\": "src/"
+            "Addeeandra\\Paranoia\\": "src/"
         }
     },
     "autoload-dev": {

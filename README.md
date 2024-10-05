@@ -1,6 +1,9 @@
 <p align="center">
     <h1 align="center">Paranoia</h1>
     <p align="center">Laravel Security Compliance for Stateful Session</p>
+    <p align="center">
+        <a href="https://github.com/addeeandra/paranoia/actions"><img alt="GitHub Workflow Status (main)" src="https://github.com/addeeandra/paranoia/actions/workflows/tests.yml/badge.svg"/></a>
+    </p>
 </p>
 
 ------

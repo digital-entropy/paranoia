@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Addeeandra\Paranoia\Middlewares;
 
-use Addeeandra\Paranoia\Events\GeoDeviationDetected;
+use Addeeandra\Paranoia\Events\GeoRestrictionViolationDetected;
 use Addeeandra\Paranoia\Services\IpInfo;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
-class GeoDeviationMiddleware
+class GeoRestrictionMiddleware
 {
     /**
      * @throws GuzzleException
@@ -20,12 +20,12 @@ class GeoDeviationMiddleware
         $allowed = config('paranoia.geo.allowed');
 
         if (is_array($allowed) && ! in_array($country, $allowed) && ! in_array('*', $allowed)) {
-            event(GeoDeviationDetected::class, $request->getUser());
+            event(GeoRestrictionViolationDetected::class, $request->getUser());
             $this->actionWhenNotAllowed();
         }
 
         if (is_string($allowed) && $country !== $allowed && $allowed !== '*') {
-            event(GeoDeviationDetected::class, $request->getUser());
+            event(GeoRestrictionViolationDetected::class, $request->getUser());
             $this->actionWhenNotAllowed();
         }
 

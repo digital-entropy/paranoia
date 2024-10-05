@@ -5,21 +5,25 @@ declare(strict_types=1);
 namespace Addeeandra\Paranoia\Services;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\HandlerStack;
 
-class IpInfo
+final class IpInfo
 {
     /**
-     * @throws GuzzleException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public static function getCountry(?string $ip): string
+    public static function getCountry(?string $ip, ?callable $handler = null): string
     {
         if ($ip === null) {
             return '';
         }
 
-        $client = new Client;
-        $response = $client->get("https://ipinfo.io/$ip/country");
+        $client = new Client(['handler' => HandlerStack::create($handler)]);
+        $response = $client->get("https://ipinfo.io/$ip/country", [
+            'query' => [
+                'token' => config('paranoia.ipinfo.token'),
+            ],
+        ]);
 
         return $response->getBody()->getContents();
     }

@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class GeoDeviationDetected
+class GeoRestrictionViolationDetected
 {
     use Dispatchable, SerializesModels;
 

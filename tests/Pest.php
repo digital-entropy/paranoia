@@ -40,7 +40,7 @@ pest()->extend(Tests\TestCase::class)->in('Features');
 
 function mock_ipInfo_getCountry(string $ip, string $country): void
 {
-    mock('alias:' . \Addeeandra\Paranoia\Services\IpInfo::class)
+    mock('alias:'.\Addeeandra\Paranoia\Services\IpInfo::class)
         ->shouldReceive('getCountry')
         ->with($ip)
         ->andReturn($country);

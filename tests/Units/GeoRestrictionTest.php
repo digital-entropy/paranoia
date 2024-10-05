@@ -6,14 +6,13 @@ namespace Tests\Units;
 
 use Addeeandra\Paranoia\Events\GeoRestrictionViolationDetected;
 use Addeeandra\Paranoia\Middlewares\GeoRestrictionMiddleware;
-use Addeeandra\Paranoia\Services\IpInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 covers(GeoRestrictionMiddleware::class);
 
-describe('should not throws exception', function () {
+describe('should not throws exception', function (): void {
 
     test('allow single country and that country\'s IP should accepted', function (string $allowed, string $clientIp, string $ipCountry): void {
         $this->app['config']->set('paranoia.geo.allowed', $allowed);
@@ -59,7 +58,7 @@ describe('should not throws exception', function () {
 
 });
 
-describe('should throws exception', function () {
+describe('should throws exception', function (): void {
 
     test('allow single country and other country\'s IP should rejected (array)', function (string $allowed, string $clientIp, string $ipCountry): void {
         $this->app['config']->set('paranoia.geo.allowed', [$allowed]);

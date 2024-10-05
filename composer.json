@@ -17,7 +17,9 @@
         "php": "^8.3.0"
     },
     "require-dev": {
+        "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.17.3",
+        "orchestra/testbench": "^9.5",
         "pestphp/pest": "^3.0.7",
         "pestphp/pest-plugin-type-coverage": "^3.0",
         "phpstan/phpstan": "^1.12.4",
@@ -34,6 +36,27 @@
             "Tests\\": "tests/"
         }
     },
+    "scripts": {
+        "refactor": "rector",
+        "lint": "pint",
+        "test:refacto": "rector --dry-run",
+        "test:lint": "pint --test",
+        "test:types": "phpstan analyse --ansi",
+        "test:unit": "pest --colors=always --parallel --coverage --min=100",
+        "test": [
+            "@test:refacto",
+            "@test:lint",
+            "@test:types",
+            "@test:unit"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Addeeandra\\Paranoia\\ParanoiaServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
@@ -42,19 +65,5 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
-    },
-    "scripts": {
-        "refacto": "rector",
-        "lint": "pint",
-        "test:refacto": "rector --dry-run",
-        "test:lint": "pint --test",
-        "test:types": "phpstan analyse --ansi",
-        "test:unit": "pest --colors=always --coverage --parallel --min=100",
-        "test": [
-            "@test:refacto",
-            "@test:lint",
-            "@test:types",
-            "@test:unit"
-        ]
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class IPChangeRestrictionMiddleware
 {
-    public function handle(Request $request, \Closure $next): void
+    public function handle(Request $request, \Closure $next): mixed
     {
         $paranoia = (new Paranoia);
 
@@ -26,7 +26,7 @@ class IPChangeRestrictionMiddleware
             }
         }
 
-        $next($request);
+        return $next($request);
     }
 
     public function actionWhenViolation(): void

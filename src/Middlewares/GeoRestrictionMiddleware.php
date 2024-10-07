@@ -14,7 +14,7 @@ class GeoRestrictionMiddleware
     /**
      * @throws GuzzleException
      */
-    public function handle(Request $request, \Closure $next): void
+    public function handle(Request $request, \Closure $next): mixed
     {
         $country = trim(IpInfo::getCountry($request->ip()));
         $allowed = config('paranoia.geo.allowed');
@@ -29,7 +29,7 @@ class GeoRestrictionMiddleware
             $this->actionWhenNotAllowed();
         }
 
-        $next($request);
+        return $next($request);
     }
 
     protected function actionWhenNotAllowed(): void

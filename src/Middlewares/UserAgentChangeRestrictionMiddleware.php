@@ -15,19 +15,21 @@ class UserAgentChangeRestrictionMiddleware
 
     public function handle(Request $request, \Closure $next): mixed
     {
-        if ($this->paranoia->isCompatibleForUserAgentRestriction()) {
-            $requestAgent = $request->userAgent();
-            $sessionAgent = $this->paranoia->getSessionUserAgent();
+        if (! $this->paranoia->shouldCheckUserAgentRestriction()) {
+            return $next($request);
+        }
 
-            if ($requestAgent !== $sessionAgent) {
-                event(UserAgentChangeDuringSessionViolationDetected::class, auth()->guard()->user());
+        $requestAgent = $request->userAgent();
+        $sessionAgent = $this->paranoia->getSessionUserAgent();
 
-                if (auth()->guard() instanceof StatefulGuard) {
-                    auth()->guard()->logout();
-                }
+        if ($requestAgent !== $sessionAgent) {
+            event(UserAgentChangeDuringSessionViolationDetected::class, auth()->guard()->user());
 
-                $this->actionWhenViolation();
+            if (auth()->guard() instanceof StatefulGuard) {
+                auth()->guard()->logout();
             }
+
+            $this->actionWhenViolation();
         }
 
         return $next($request);

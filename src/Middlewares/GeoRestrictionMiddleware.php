@@ -5,17 +5,24 @@ declare(strict_types=1);
 namespace Addeeandra\Paranoia\Middlewares;
 
 use Addeeandra\Paranoia\Events\GeoRestrictionViolationDetected;
+use Addeeandra\Paranoia\Paranoia;
 use Addeeandra\Paranoia\Services\IpInfo;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
 class GeoRestrictionMiddleware
 {
+    public function __construct(protected Paranoia $paranoia) {}
+
     /**
      * @throws GuzzleException
      */
     public function handle(Request $request, \Closure $next): mixed
     {
+        if (! $this->paranoia->shouldCheckGeoRestriction()) {
+            return $next($request);
+        }
+
         $country = trim(IpInfo::getCountry($request->ip()));
         $allowed = $this->getAllowedGeoLocation();
 

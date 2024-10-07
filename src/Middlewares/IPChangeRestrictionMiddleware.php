@@ -15,19 +15,21 @@ class IPChangeRestrictionMiddleware
 
     public function handle(Request $request, \Closure $next): mixed
     {
-        if ($this->paranoia->isCompatibleForIPRestriction()) {
-            $requestIP = $request->ip();
-            $sessionIP = $this->paranoia->getSessionIpAddress();
+        if (! $this->paranoia->shouldCheckIPRestriction()) {
+            return $next($request);
+        }
 
-            if ($requestIP !== $sessionIP) {
-                event(IPChangeDuringSessionViolationDetected::class, auth()->guard()->user());
+        $requestIP = $request->ip();
+        $sessionIP = $this->paranoia->getSessionIpAddress();
 
-                if (auth()->guard() instanceof StatefulGuard) {
-                    auth()->guard()->logout();
-                }
+        if ($requestIP !== $sessionIP) {
+            event(IPChangeDuringSessionViolationDetected::class, auth()->guard()->user());
 
-                $this->actionWhenViolation();
+            if (auth()->guard() instanceof StatefulGuard) {
+                auth()->guard()->logout();
             }
+
+            $this->actionWhenViolation();
         }
 
         return $next($request);

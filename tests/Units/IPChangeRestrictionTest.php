@@ -14,7 +14,7 @@ test('should throws exception', function (string $sessionIp, string $newIp): voi
     );
 
     $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
-    $mockedParanoia->shouldReceive('isCompatibleForIPRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('shouldCheckIPRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionIpAddress')->andReturn($sessionIp);
 
     try {
@@ -42,7 +42,7 @@ test('should not throws exception', function (string $sessionIp, string $newIp):
     );
 
     $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
-    $mockedParanoia->shouldReceive('isCompatibleForIPRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('shouldCheckIPRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionIpAddress')->andReturn($sessionIp);
 
     (new IPChangeRestrictionMiddleware($mockedParanoia))->handle(

@@ -24,8 +24,11 @@ describe('should not throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
+        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+
         Event::fake(GeoRestrictionViolationDetected::class);
-        (new GeoRestrictionMiddleware)->handle($request, function (): void {
+        (new GeoRestrictionMiddleware($mockedParanoia))->handle($request, function (): void {
             // do nothing
         });
         Event::assertNotDispatched(GeoRestrictionViolationDetected::class);
@@ -45,8 +48,11 @@ describe('should not throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
+        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+
         Event::fake(GeoRestrictionViolationDetected::class);
-        (new GeoRestrictionMiddleware)->handle($request, function (): void {
+        (new GeoRestrictionMiddleware($mockedParanoia))->handle($request, function (): void {
             // do nothing
         });
         Event::assertNotDispatched(GeoRestrictionViolationDetected::class);
@@ -70,9 +76,12 @@ describe('should throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
+        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+
         try {
             Event::fake(GeoRestrictionViolationDetected::class);
-            (new GeoRestrictionMiddleware)->handle($request, function (Request $request): void {
+            (new GeoRestrictionMiddleware($mockedParanoia))->handle($request, function (Request $request): void {
                 //
             });
         } catch (\Throwable $exception) {
@@ -95,9 +104,12 @@ describe('should throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
+        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+
         try {
             Event::fake(GeoRestrictionViolationDetected::class);
-            (new GeoRestrictionMiddleware)->handle($request, function (): void {
+            (new GeoRestrictionMiddleware($mockedParanoia))->handle($request, function (): void {
                 // do nothing
             });
         } catch (\Throwable $e) {

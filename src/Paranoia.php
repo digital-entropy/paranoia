@@ -12,14 +12,19 @@ class Paranoia
         return config('session.table', 'sessions');
     }
 
-    public function isCompatibleForIPRestriction(): bool
+    public function shouldCheckGeoRestriction(): bool
     {
-        return session()->getDefaultDriver() === 'database' && $this->getSessionTable() !== null;
+        return auth()->guard()->check();
     }
 
-    public function isCompatibleForUserAgentRestriction(): bool
+    public function shouldCheckIPRestriction(): bool
     {
-        return session()->getDefaultDriver() === 'database' && $this->getSessionTable() !== null;
+        return session()->getDefaultDriver() === 'database' && $this->getSessionTable() !== null && auth()->guard()->check();
+    }
+
+    public function shouldCheckUserAgentRestriction(): bool
+    {
+        return session()->getDefaultDriver() === 'database' && $this->getSessionTable() !== null && auth()->guard()->check();
     }
 
     public function getSessionIpAddress(): ?string

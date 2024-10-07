@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class IPChangeRestrictionMiddleware
 {
+    public function __construct(protected Paranoia $paranoia) {}
+
     public function handle(Request $request, \Closure $next): mixed
     {
-        $paranoia = (new Paranoia);
-
-        if ($paranoia->isCompatibleForIPRestriction()) {
+        if ($this->paranoia->isCompatibleForIPRestriction()) {
             $requestIP = $request->ip();
-            $sessionIP = $paranoia->getSessionIpAddress();
+            $sessionIP = $this->paranoia->getSessionIpAddress();
 
             if ($requestIP !== $sessionIP) {
                 event(IPChangeDuringSessionViolationDetected::class, $request->getUser());

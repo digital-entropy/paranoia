@@ -13,6 +13,9 @@ class ParanoiaServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
 
+        $this->app->bind(Paranoia::class, fn (): \Addeeandra\Paranoia\Paranoia => new Paranoia);
+        $this->app->alias(Paranoia::class, 'paranoia');
+
         $this->mergeConfigFrom(__DIR__.'/../config/paranoia.php', 'paranoia');
     }
 

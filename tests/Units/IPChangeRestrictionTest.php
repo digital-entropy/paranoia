@@ -13,17 +13,15 @@ test('should throws exception', function (string $sessionIp, string $newIp): voi
         server: ['REMOTE_ADDR' => $newIp]
     );
 
-    mock('overload:'.\Addeeandra\Paranoia\Paranoia::class)
-        ->shouldReceive('isCompatibleForIPRestriction')
-        ->andReturn(true)
-        ->shouldReceive('getSessionIpAddress')
-        ->andReturn($sessionIp);
+    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia->shouldReceive('isCompatibleForIPRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('getSessionIpAddress')->andReturn($sessionIp);
 
     try {
         Event::fake(IPChangeDuringSessionViolationDetected::class);
-        (new IPChangeRestrictionMiddleware)->handle(
+        (new IPChangeRestrictionMiddleware($mockedParanoia))->handle(
             $request,
-            function (): void {
+            function ($request): void {
                 // do nothing
             }
         );
@@ -43,15 +41,13 @@ test('should not throws exception', function (string $sessionIp, string $newIp):
         server: ['REMOTE_ADDR' => $newIp]
     );
 
-    mock('overload:'.\Addeeandra\Paranoia\Paranoia::class)
-        ->shouldReceive('isCompatibleForIPRestriction')
-        ->andReturn(true)
-        ->shouldReceive('getSessionIpAddress')
-        ->andReturn($sessionIp);
+    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia->shouldReceive('isCompatibleForIPRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('getSessionIpAddress')->andReturn($sessionIp);
 
-    (new IPChangeRestrictionMiddleware)->handle(
+    (new IPChangeRestrictionMiddleware($mockedParanoia))->handle(
         $request,
-        function (): void {
+        function ($request): void {
             // do nothing
         }
     );

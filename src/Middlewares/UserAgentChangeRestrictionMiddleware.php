@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class UserAgentChangeRestrictionMiddleware
 {
+    public function __construct(protected Paranoia $paranoia) {}
+
     public function handle(Request $request, \Closure $next): mixed
     {
-        $paranoia = (new Paranoia);
-
-        if ($paranoia->isCompatibleForUserAgentRestriction()) {
+        if ($this->paranoia->isCompatibleForUserAgentRestriction()) {
             $requestAgent = $request->userAgent();
-            $sessionAgent = $paranoia->getSessionUserAgent();
+            $sessionAgent = $this->paranoia->getSessionUserAgent();
 
             if ($requestAgent !== $sessionAgent) {
                 event(UserAgentChangeDuringSessionViolationDetected::class, $request->getUser());

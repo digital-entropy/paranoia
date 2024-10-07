@@ -13,17 +13,15 @@ test('should throws exception', function (string $sessionAgent, string $newAgent
         server: ['HTTP_USER_AGENT' => $newAgent]
     );
 
-    mock('overload:'.\Addeeandra\Paranoia\Paranoia::class)
-        ->shouldReceive('isCompatibleForUserAgentRestriction')
-        ->andReturn(true)
-        ->shouldReceive('getSessionUserAgent')
-        ->andReturn($sessionAgent);
+    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia->shouldReceive('isCompatibleForUserAgentRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('getSessionUserAgent')->andReturn($sessionAgent);
 
     try {
         Event::fake(UserAgentChangeDuringSessionViolationDetected::class);
-        (new UserAgentChangeRestrictionMiddleware)->handle(
+        (new UserAgentChangeRestrictionMiddleware($mockedParanoia))->handle(
             $request,
-            function (): void {
+            function ($request): void {
                 // do nothing
             }
         );
@@ -48,15 +46,13 @@ test('should not throws exception', function (string $sessionAgent, string $newA
         server: ['HTTP_USER_AGENT' => $newAgent]
     );
 
-    mock('overload:'.\Addeeandra\Paranoia\Paranoia::class)
-        ->shouldReceive('isCompatibleForUserAgentRestriction')
-        ->andReturn(true)
-        ->shouldReceive('getSessionUserAgent')
-        ->andReturn($sessionAgent);
+    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia->shouldReceive('isCompatibleForUserAgentRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('getSessionUserAgent')->andReturn($sessionAgent);
 
-    (new UserAgentChangeRestrictionMiddleware)->handle(
+    (new UserAgentChangeRestrictionMiddleware($mockedParanoia))->handle(
         $request,
-        function (): void {
+        function ($request): void {
             // do nothing
         }
     );

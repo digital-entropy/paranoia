@@ -17,7 +17,9 @@
     </php>
     <source>
         <include>
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./src/Middlewares</directory>
+            <directory suffix=".php">./src/Securities</directory>
+            <directory suffix=".php">./src/Services</directory>
         </include>
     </source>
 </phpunit>

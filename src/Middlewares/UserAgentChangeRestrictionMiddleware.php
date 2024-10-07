@@ -6,6 +6,7 @@ namespace Addeeandra\Paranoia\Middlewares;
 
 use Addeeandra\Paranoia\Events\UserAgentChangeDuringSessionViolationDetected;
 use Addeeandra\Paranoia\Paranoia;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 
 class UserAgentChangeRestrictionMiddleware
@@ -19,8 +20,11 @@ class UserAgentChangeRestrictionMiddleware
             $sessionAgent = $this->paranoia->getSessionUserAgent();
 
             if ($requestAgent !== $sessionAgent) {
-                event(UserAgentChangeDuringSessionViolationDetected::class, $request->getUser());
-                session()->flush();
+                event(UserAgentChangeDuringSessionViolationDetected::class, auth()->guard()->user());
+
+                if (auth()->guard() instanceof StatefulGuard) {
+                    auth()->guard()->logout();
+                }
 
                 $this->actionWhenViolation();
             }

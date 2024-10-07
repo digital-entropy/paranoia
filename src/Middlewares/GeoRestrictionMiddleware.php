@@ -20,12 +20,12 @@ class GeoRestrictionMiddleware
         $allowed = $this->getAllowedGeoLocation();
 
         if (is_array($allowed) && ! in_array($country, $allowed) && ! in_array('*', $allowed)) {
-            event(GeoRestrictionViolationDetected::class, $request->getUser());
+            event(GeoRestrictionViolationDetected::class, auth()->guard()->user());
             $this->actionWhenNotAllowed();
         }
 
         if (is_string($allowed) && $country !== $allowed && $allowed !== '*') {
-            event(GeoRestrictionViolationDetected::class, $request->getUser());
+            event(GeoRestrictionViolationDetected::class, auth()->guard()->user());
             $this->actionWhenNotAllowed();
         }
 

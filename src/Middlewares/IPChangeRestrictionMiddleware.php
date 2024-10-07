@@ -6,6 +6,7 @@ namespace Addeeandra\Paranoia\Middlewares;
 
 use Addeeandra\Paranoia\Events\IPChangeDuringSessionViolationDetected;
 use Addeeandra\Paranoia\Paranoia;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 
 class IPChangeRestrictionMiddleware
@@ -19,8 +20,11 @@ class IPChangeRestrictionMiddleware
             $sessionIP = $this->paranoia->getSessionIpAddress();
 
             if ($requestIP !== $sessionIP) {
-                event(IPChangeDuringSessionViolationDetected::class, $request->getUser());
-                session()->flush();
+                event(IPChangeDuringSessionViolationDetected::class, auth()->guard()->user());
+
+                if (auth()->guard() instanceof StatefulGuard) {
+                    auth()->guard()->logout();
+                }
 
                 $this->actionWhenViolation();
             }

@@ -1,7 +1,7 @@
 <?php
 
-use Addeeandra\Paranoia\Events\UserAgentChangeDuringSessionViolationDetected;
-use Addeeandra\Paranoia\Middlewares\UserAgentChangeRestrictionMiddleware;
+use Dentro\Paranoia\Events\UserAgentChangeDuringSessionViolationDetected;
+use Dentro\Paranoia\Middlewares\UserAgentChangeRestrictionMiddleware;
 use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -13,7 +13,7 @@ test('should throws exception', function (string $sessionAgent, string $newAgent
         server: ['HTTP_USER_AGENT' => $newAgent]
     );
 
-    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
     $mockedParanoia->shouldReceive('shouldCheckUserAgentRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionUserAgent')->andReturn($sessionAgent);
 
@@ -46,7 +46,7 @@ test('should not throws exception', function (string $sessionAgent, string $newA
         server: ['HTTP_USER_AGENT' => $newAgent]
     );
 
-    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
     $mockedParanoia->shouldReceive('shouldCheckUserAgentRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionUserAgent')->andReturn($sessionAgent);
 

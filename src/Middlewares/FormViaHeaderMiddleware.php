@@ -1,6 +1,6 @@
 <?php
 
-namespace Addeeandra\Paranoia\Middlewares;
+namespace Dentro\Paranoia\Middlewares;
 
 use Illuminate\Http\Request;
 

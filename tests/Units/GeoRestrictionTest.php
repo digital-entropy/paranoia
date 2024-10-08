@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Units;
 
-use Addeeandra\Paranoia\Events\GeoRestrictionViolationDetected;
-use Addeeandra\Paranoia\Middlewares\GeoRestrictionMiddleware;
+use Dentro\Paranoia\Events\GeoRestrictionViolationDetected;
+use Dentro\Paranoia\Middlewares\GeoRestrictionMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -24,7 +24,7 @@ describe('should not throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
-        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
         $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
 
         Event::fake(GeoRestrictionViolationDetected::class);
@@ -48,7 +48,7 @@ describe('should not throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
-        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
         $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
 
         Event::fake(GeoRestrictionViolationDetected::class);
@@ -76,7 +76,7 @@ describe('should throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
-        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
         $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
 
         try {
@@ -104,7 +104,7 @@ describe('should throws exception', function (): void {
             server: ['REMOTE_ADDR' => $clientIp],
         );
 
-        $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+        $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
         $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
 
         try {

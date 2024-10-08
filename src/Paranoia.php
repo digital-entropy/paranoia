@@ -1,6 +1,6 @@
 <?php
 
-namespace Addeeandra\Paranoia;
+namespace Dentro\Paranoia;
 
 use Illuminate\Support\Facades\DB;
 

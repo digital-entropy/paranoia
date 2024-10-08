@@ -39,10 +39,10 @@ software, and such.
 
 ```php
 # Register this Middleware
-\Addeeandra\Paranoia\Middlewares\GeoRestrictionMiddleware::class
+\Dentro\Paranoia\Middlewares\GeoRestrictionMiddleware::class
 
 # Event dispatched by this detection
-\Addeeandra\Paranoia\Events\GeoRestrictionDetected::class
+\Dentro\Paranoia\Events\GeoRestrictionDetected::class
 ```
 
 Check [OWASP AppSensor](https://owasp.org/www-project-appsensor/) at **RP1: Suspicious or Disallowed User Source
@@ -55,10 +55,10 @@ on new IP. Please be aware that changing WiFi or Mobile Data can be detected as 
 
 ```php
 # Register this Middleware
-\Addeeandra\Paranoia\Middlewares\IPChangeRestrictionMiddleware::class
+\Dentro\Paranoia\Middlewares\IPChangeRestrictionMiddleware::class
 
 # Event dispatched by this detection
-\Addeeandra\Paranoia\Events\IPChangeDuringSessionViolationDetected::class
+\Dentro\Paranoia\Events\IPChangeDuringSessionViolationDetected::class
 ```
 
 ## Locations Changes During Session Detection
@@ -83,10 +83,10 @@ but it checks suspicious changes on User-Agent. Can preventing user's session to
 
 ```php
 # Register this Middleware
-\Addeeandra\Paranoia\Middlewares\UserAgentChangeRestrictionMiddleware::class
+\Dentro\Paranoia\Middlewares\UserAgentChangeRestrictionMiddleware::class
 
 # Event dispatched by this detection
-\Addeeandra\Paranoia\Events\UserAgentChangeDuringSessionViolationDetected::class
+\Dentro\Paranoia\Events\UserAgentChangeDuringSessionViolationDetected::class
 ```
 This feature minimize the **escalation** risk
 of [Session Hijacking Attack](https://owasp.org/www-community/attacks/Session_hijacking_attack).
@@ -105,7 +105,7 @@ This utility prevents plain-text body submission.
 
 ```php
 # Register this Middleware
-\Addeeandra\Paranoia\Middlewares\FormViaHeaderMiddleware::class
+\Dentro\Paranoia\Middlewares\FormViaHeaderMiddleware::class
 ```
 
 The middleware use `X-Form` header, decode `X-Form` as array, and convert the array as request's inputs.

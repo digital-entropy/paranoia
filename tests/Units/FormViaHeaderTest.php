@@ -1,6 +1,6 @@
 <?php
 
-use Addeeandra\Paranoia\Middlewares\FormViaHeaderMiddleware;
+use Dentro\Paranoia\Middlewares\FormViaHeaderMiddleware;
 use Illuminate\Http\Request;
 
 test('POST form should correctly mapped in Request', function (): void {

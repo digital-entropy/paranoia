@@ -1,7 +1,7 @@
 <?php
 
-use Addeeandra\Paranoia\Events\IPChangeDuringSessionViolationDetected;
-use Addeeandra\Paranoia\Middlewares\IPChangeRestrictionMiddleware;
+use Dentro\Paranoia\Events\IPChangeDuringSessionViolationDetected;
+use Dentro\Paranoia\Middlewares\IPChangeRestrictionMiddleware;
 use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -13,7 +13,7 @@ test('should throws exception', function (string $sessionIp, string $newIp): voi
         server: ['REMOTE_ADDR' => $newIp]
     );
 
-    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
     $mockedParanoia->shouldReceive('shouldCheckIPRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionIpAddress')->andReturn($sessionIp);
 
@@ -41,7 +41,7 @@ test('should not throws exception', function (string $sessionIp, string $newIp):
         server: ['REMOTE_ADDR' => $newIp]
     );
 
-    $mockedParanoia = mock(\Addeeandra\Paranoia\Paranoia::class);
+    $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
     $mockedParanoia->shouldReceive('shouldCheckIPRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionIpAddress')->andReturn($sessionIp);
 

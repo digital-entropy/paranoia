@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Addeeandra\Paranoia\Securities;
+namespace Dentro\Paranoia\Securities;
 
 final class SessionSecurity
 {

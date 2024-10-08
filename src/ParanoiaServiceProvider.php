@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Addeeandra\Paranoia;
+namespace Dentro\Paranoia;
 
-use Addeeandra\Paranoia\Providers\EventServiceProvider;
+use Dentro\Paranoia\Providers\EventServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class ParanoiaServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class ParanoiaServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
 
-        $this->app->bind(Paranoia::class, fn (): \Addeeandra\Paranoia\Paranoia => new Paranoia);
+        $this->app->bind(Paranoia::class, fn (): \Dentro\Paranoia\Paranoia => new Paranoia);
         $this->app->alias(Paranoia::class, 'paranoia');
 
         $this->mergeConfigFrom(__DIR__.'/../config/paranoia.php', 'paranoia');

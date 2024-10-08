@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Addeeandra\Paranoia\Middlewares;
+namespace Dentro\Paranoia\Middlewares;
 
-use Addeeandra\Paranoia\Events\GeoRestrictionViolationDetected;
-use Addeeandra\Paranoia\Paranoia;
-use Addeeandra\Paranoia\Services\IpInfo;
+use Dentro\Paranoia\Events\GeoRestrictionViolationDetected;
+use Dentro\Paranoia\Paranoia;
+use Dentro\Paranoia\Services\IpInfo;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 

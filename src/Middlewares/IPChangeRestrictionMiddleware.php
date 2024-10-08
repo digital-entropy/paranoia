@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Addeeandra\Paranoia\Middlewares;
+namespace Dentro\Paranoia\Middlewares;
 
-use Addeeandra\Paranoia\Events\IPChangeDuringSessionViolationDetected;
-use Addeeandra\Paranoia\Paranoia;
+use Dentro\Paranoia\Events\IPChangeDuringSessionViolationDetected;
+use Dentro\Paranoia\Paranoia;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Addeeandra\Paranoia\Services;
+namespace Dentro\Paranoia\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Addeeandra\Paranoia\Providers;
+namespace Dentro\Paranoia\Providers;
 
-use Addeeandra\Paranoia\Events\GeoRestrictionViolationDetected;
+use Dentro\Paranoia\Events\GeoRestrictionViolationDetected;
 use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

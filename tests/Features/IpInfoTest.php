@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Features;
 
-use Addeeandra\Paranoia\Services\IpInfo;
+use Dentro\Paranoia\Services\IpInfo;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 

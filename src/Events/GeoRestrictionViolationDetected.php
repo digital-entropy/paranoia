@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Addeeandra\Paranoia\Events;
+namespace Dentro\Paranoia\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;

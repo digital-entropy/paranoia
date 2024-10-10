@@ -35,23 +35,23 @@ class Paranoia
 
     public function saveSessionIpAddress(): void
     {
-        $this->storage->saveSessionIpAddress(session()->id());
+        $this->storage->saveSessionIpAddress(session()->getId());
     }
 
     public function saveSessionUserAgent(): void
     {
-        $this->storage->saveSessionUserAgent(session()->id());
+        $this->storage->saveSessionUserAgent(session()->getId());
     }
 
     public function getSessionIpAddress(): ?string
     {
         /** @var string|null */
-        return $this->storage->getSavedIpAddress(session()->id());
+        return $this->storage->getSavedIpAddress(session()->getId());
     }
 
     public function getSessionUserAgent(): ?string
     {
         /** @var string|null */
-        return $this->storage->getSavedUserAgent(session()->id());
+        return $this->storage->getSavedUserAgent(session()->getId());
     }
 }

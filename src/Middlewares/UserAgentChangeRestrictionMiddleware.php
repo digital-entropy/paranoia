@@ -57,7 +57,7 @@ class UserAgentChangeRestrictionMiddleware
         $verified = $this
             ->paranoia
             ->cookieLayer(CookieLayer::USER_AGENT)
-            ->verify(auth()->guard()->user()?->getAuthIdentifier());
+            ->verify((string) auth()->guard()->user()?->getAuthIdentifier());
 
         if (! $verified) {
             event(UserAgentChangeDuringSessionViolationDetected::class, auth()->guard()->user());

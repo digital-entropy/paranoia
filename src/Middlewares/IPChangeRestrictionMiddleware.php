@@ -57,7 +57,7 @@ class IPChangeRestrictionMiddleware
         $verified = $this
             ->paranoia
             ->cookieLayer(CookieLayer::IP)
-            ->verify(auth()->guard()->user()?->getAuthIdentifier());
+            ->verify((string) auth()->guard()->user()?->getAuthIdentifier());
 
         if ($verified) {
             return;

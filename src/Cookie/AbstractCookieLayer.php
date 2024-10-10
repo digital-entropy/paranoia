@@ -20,7 +20,7 @@ abstract class AbstractCookieLayer
         cookie()->queue(cookie($this->getName(), $this->generate($key), 60 * 24 * 365));
     }
 
-    public function verify($key): bool
+    public function verify(string $key): bool
     {
         if ($this->getCookieValue() === '' || $this->getCookieValue() === '0') {
             return false;

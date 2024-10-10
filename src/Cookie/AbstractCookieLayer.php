@@ -17,7 +17,7 @@ abstract class AbstractCookieLayer
             return;
         }
 
-        cookie()->queue(cookie(self::getName(), self::generate($key), 60 * 24 * 365));
+        cookie()->queue(cookie($this->getName(), $this->generate($key), 60 * 24 * 365));
     }
 
     public function verify($key): bool
@@ -26,7 +26,7 @@ abstract class AbstractCookieLayer
             return false;
         }
 
-        return request()->cookie(self::getName()) === self::generate($key);
+        return request()->cookie($this->getName()) === $this->generate($key);
     }
 
     public function hashAlgo(): string

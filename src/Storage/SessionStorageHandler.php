@@ -11,12 +11,16 @@ class SessionStorageHandler implements Contracts\SessionStorageContract
 {
     public function saveSessionIpAddress(string $sessionId): void
     {
-        session()->put('ip_address', request()->ip());
+        if (! session()->has('ip_address')) {
+            session()->put('ip_address', request()->ip());
+        }
     }
 
     public function saveSessionUserAgent(string $sessionId): void
     {
-        session()->put('user_agent', request()->ip());
+        if (! session()->has('user_agent')) {
+            session()->put('user_agent', request()->userAgent());
+        }
     }
 
     /**
@@ -25,7 +29,7 @@ class SessionStorageHandler implements Contracts\SessionStorageContract
      */
     public function getSavedIpAddress(string $sessionId): ?string
     {
-        return session()->get('ip_address') ?? null;
+        return session()->get('ip_address', null);
     }
 
     /**
@@ -34,7 +38,7 @@ class SessionStorageHandler implements Contracts\SessionStorageContract
      */
     public function getSavedUserAgent(string $sessionId): ?string
     {
-        return session()->get('user_agent') ?? null;
+        return session()->get('user_agent', null);
     }
 
     /**

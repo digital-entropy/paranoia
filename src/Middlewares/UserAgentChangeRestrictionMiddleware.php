@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dentro\Paranoia\Middlewares;
 
+use Dentro\Paranoia\Cookie\CookieLayer;
 use Dentro\Paranoia\Events\UserAgentChangeDuringSessionViolationDetected;
 use Dentro\Paranoia\Paranoia;
 use Illuminate\Contracts\Auth\StatefulGuard;
@@ -19,18 +20,9 @@ class UserAgentChangeRestrictionMiddleware
             return $next($request);
         }
 
-        $requestAgent = $request->userAgent();
-        $sessionAgent = $this->paranoia->getSessionUserAgent();
+        $this->validateSessionUserAgent($request);
 
-        if ($requestAgent !== $sessionAgent) {
-            event(UserAgentChangeDuringSessionViolationDetected::class, auth()->guard()->user());
-
-            if (auth()->guard() instanceof StatefulGuard) {
-                auth()->guard()->logout();
-            }
-
-            $this->actionWhenViolation();
-        }
+        $this->validateCookieUserAgent($request);
 
         return $next($request);
     }
@@ -38,5 +30,48 @@ class UserAgentChangeRestrictionMiddleware
     public function actionWhenViolation(): void
     {
         abort(403);
+    }
+
+    public function validateSessionUserAgent(Request $request): void
+    {
+        $requestAgent = $request->userAgent();
+        $sessionAgent = $this->paranoia->getSessionUserAgent();
+
+        if ($requestAgent === $sessionAgent) {
+            return;
+        }
+
+        event(UserAgentChangeDuringSessionViolationDetected::class, auth()->guard()->user());
+
+        $this->logout();
+
+        $this->actionWhenViolation();
+    }
+
+    public function validateCookieUserAgent(Request $request): void
+    {
+        if (! $this->paranoia->useCookieForUserAgent()) {
+            return;
+        }
+
+        $verified = $this
+            ->paranoia
+            ->cookieLayer(CookieLayer::USER_AGENT)
+            ->verify(auth()->guard()->user()?->getAuthIdentifier());
+
+        if (! $verified) {
+            event(UserAgentChangeDuringSessionViolationDetected::class, auth()->guard()->user());
+
+            $this->logout();
+
+            $this->actionWhenViolation();
+        }
+    }
+
+    protected function logout(): void
+    {
+        if (auth()->guard() instanceof StatefulGuard) {
+            auth()->guard()->logout();
+        }
     }
 }

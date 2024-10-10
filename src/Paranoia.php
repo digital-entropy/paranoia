@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Dentro\Paranoia;
 
+use Dentro\Paranoia\Cookie\AbstractCookieLayer;
+use Dentro\Paranoia\Cookie\CookieLayerFactory;
 use Dentro\Paranoia\Storage\Contracts\SessionStorageContract;
 use Dentro\Paranoia\Storage\SessionStorageHandler;
 
@@ -53,5 +55,22 @@ class Paranoia
     {
         /** @var string|null */
         return $this->storage->getSavedUserAgent(session()->getId());
+    }
+
+    public function useCookieForUserAgent(): bool
+    {
+        /** @var bool */
+        return config('paranoia.use_cookie_layer', true);
+    }
+
+    public function useCookieForIP(): bool
+    {
+        /** @var bool */
+        return config('paranoia.use_cookie_layer', true);
+    }
+
+    public function cookieLayer(string $name): AbstractCookieLayer
+    {
+        return (new CookieLayerFactory($name))->make();
     }
 }

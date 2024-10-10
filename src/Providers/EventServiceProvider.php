@@ -10,14 +10,11 @@ use Dentro\Paranoia\Listeners\StoreSessionIP;
 use Dentro\Paranoia\Listeners\StoreSessionUserAgent;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
-use Illuminate\Events\EventServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
-    /**
-     * @var array<string, array<string>>
-     */
-    protected array $listen = [
+    protected $listen = [
         Login::class => [
             StoreSessionIP::class,
             StoreSessionUserAgent::class,

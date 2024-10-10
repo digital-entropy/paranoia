@@ -25,7 +25,7 @@ describe('should not throws exception', function (): void {
         );
 
         $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
-        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+        $mockedParanoia->shouldReceive('eligibleForGeoRestriction')->andReturn(true);
 
         Event::fake(GeoRestrictionViolationDetected::class);
         (new GeoRestrictionMiddleware($mockedParanoia))->handle($request, function (): void {
@@ -49,7 +49,7 @@ describe('should not throws exception', function (): void {
         );
 
         $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
-        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+        $mockedParanoia->shouldReceive('eligibleForGeoRestriction')->andReturn(true);
 
         Event::fake(GeoRestrictionViolationDetected::class);
         (new GeoRestrictionMiddleware($mockedParanoia))->handle($request, function (): void {
@@ -77,7 +77,7 @@ describe('should throws exception', function (): void {
         );
 
         $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
-        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+        $mockedParanoia->shouldReceive('eligibleForGeoRestriction')->andReturn(true);
 
         try {
             Event::fake(GeoRestrictionViolationDetected::class);
@@ -105,7 +105,7 @@ describe('should throws exception', function (): void {
         );
 
         $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
-        $mockedParanoia->shouldReceive('shouldCheckGeoRestriction')->andReturn(true);
+        $mockedParanoia->shouldReceive('eligibleForGeoRestriction')->andReturn(true);
 
         try {
             Event::fake(GeoRestrictionViolationDetected::class);

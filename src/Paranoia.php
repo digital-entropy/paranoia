@@ -1,45 +1,57 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dentro\Paranoia;
 
-use Illuminate\Support\Facades\DB;
+use Dentro\Paranoia\Storage\Contracts\SessionStorageContract;
+use Dentro\Paranoia\Storage\SessionStorageHandler;
 
 class Paranoia
 {
-    protected function getSessionTable(): string
-    {
-        /** @var string */
-        return config('session.table', 'sessions');
-    }
+    public function __construct(
+        protected SessionStorageContract $storage
+    ) {}
 
-    public function shouldCheckGeoRestriction(): bool
+    public function eligibleForGeoRestriction(): bool
     {
         return auth()->guard()->check();
     }
 
-    public function shouldCheckIPRestriction(): bool
+    public function eligibleForIPRestriction(): bool
     {
-        return session()->getDefaultDriver() === 'database' && $this->getSessionTable() !== null && auth()->guard()->check();
+        return auth()->guard()->check();
     }
 
-    public function shouldCheckUserAgentRestriction(): bool
+    public function eligibleForUserAgentRestriction(): bool
     {
-        return session()->getDefaultDriver() === 'database' && $this->getSessionTable() !== null && auth()->guard()->check();
+        return auth()->guard()->check();
+    }
+
+    public function isUsingBaseDriver(): bool
+    {
+        return $this->storage instanceof SessionStorageHandler;
+    }
+
+    public function saveSessionIpAddress(): void
+    {
+        $this->storage->saveSessionIpAddress(session()->id());
+    }
+
+    public function saveSessionUserAgent(): void
+    {
+        $this->storage->saveSessionUserAgent(session()->id());
     }
 
     public function getSessionIpAddress(): ?string
     {
         /** @var string|null */
-        return DB::table($this->getSessionTable())
-            ->where('id', session()->getId())
-            ->value('ip_address');
+        return $this->storage->getSavedIpAddress(session()->id());
     }
 
     public function getSessionUserAgent(): ?string
     {
         /** @var string|null */
-        return DB::table($this->getSessionTable())
-            ->where('id', session()->getId())
-            ->value('user_agent');
+        return $this->storage->getSavedUserAgent(session()->id());
     }
 }

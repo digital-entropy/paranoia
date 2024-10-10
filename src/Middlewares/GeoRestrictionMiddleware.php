@@ -19,7 +19,7 @@ class GeoRestrictionMiddleware
      */
     public function handle(Request $request, \Closure $next): mixed
     {
-        if (! $this->paranoia->shouldCheckGeoRestriction()) {
+        if (! $this->paranoia->eligibleForGeoRestriction()) {
             return $next($request);
         }
 

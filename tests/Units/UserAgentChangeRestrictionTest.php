@@ -14,7 +14,7 @@ test('should throws exception', function (string $sessionAgent, string $newAgent
     );
 
     $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
-    $mockedParanoia->shouldReceive('shouldCheckUserAgentRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('eligibleForUserAgentRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionUserAgent')->andReturn($sessionAgent);
 
     try {
@@ -47,7 +47,7 @@ test('should not throws exception', function (string $sessionAgent, string $newA
     );
 
     $mockedParanoia = mock(\Dentro\Paranoia\Paranoia::class);
-    $mockedParanoia->shouldReceive('shouldCheckUserAgentRestriction')->andReturn(true);
+    $mockedParanoia->shouldReceive('eligibleForUserAgentRestriction')->andReturn(true);
     $mockedParanoia->shouldReceive('getSessionUserAgent')->andReturn($sessionAgent);
 
     (new UserAgentChangeRestrictionMiddleware($mockedParanoia))->handle(

@@ -15,7 +15,7 @@ class IPChangeRestrictionMiddleware
 
     public function handle(Request $request, \Closure $next): mixed
     {
-        if (! $this->paranoia->shouldCheckIPRestriction()) {
+        if (! $this->paranoia->eligibleForIPRestriction()) {
             return $next($request);
         }
 

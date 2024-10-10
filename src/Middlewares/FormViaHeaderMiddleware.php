@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dentro\Paranoia\Middlewares;
 
 use Illuminate\Http\Request;

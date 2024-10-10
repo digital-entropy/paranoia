@@ -15,7 +15,7 @@ class UserAgentChangeRestrictionMiddleware
 
     public function handle(Request $request, \Closure $next): mixed
     {
-        if (! $this->paranoia->shouldCheckUserAgentRestriction()) {
+        if (! $this->paranoia->eligibleForUserAgentRestriction()) {
             return $next($request);
         }
 

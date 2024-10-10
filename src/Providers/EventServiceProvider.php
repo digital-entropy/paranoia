@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dentro\Paranoia\Providers;
 
-use Dentro\Paranoia\Events\GeoRestrictionViolationDetected;
+use Dentro\Paranoia\Listeners\StoreSessionIP;
+use Dentro\Paranoia\Listeners\StoreSessionUserAgent;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -11,8 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array<string, array<string>>
      */
     protected array $listen = [
-        GeoRestrictionViolationDetected::class => [
-            //
+        Login::class => [
+            StoreSessionIP::class,
+            StoreSessionUserAgent::class,
         ],
     ];
 }

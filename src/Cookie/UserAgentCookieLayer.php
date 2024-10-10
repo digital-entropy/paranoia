@@ -13,6 +13,6 @@ class UserAgentCookieLayer extends AbstractCookieLayer
 
     public function getName(): string
     {
-        return 'PARA-AGENT';
+        return 'PID1';
     }
 }

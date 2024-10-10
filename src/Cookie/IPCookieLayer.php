@@ -13,7 +13,7 @@ class IPCookieLayer extends AbstractCookieLayer
 
     public function getName(): string
     {
-        return 'PARA-IP';
+        return 'PID2';
     }
 
     public function hashAlgo(): string

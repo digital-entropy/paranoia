@@ -19,7 +19,7 @@ class StoreSessionIP
 
             if ($driver->useCookieForIP()) {
                 $key = $event->user->getAuthIdentifier();
-                $driver->cookieLayer(CookieLayer::IP)->setCookie($key);
+                $driver->cookieLayer(CookieLayer::IP)->setCookie((string) $key);
             }
         }
     }

@@ -11,7 +11,7 @@ abstract class AbstractCookieLayer
         return hash($this->hashAlgo(), $this->getCookieValue().$key);
     }
 
-    public function setCookie($key): void
+    public function setCookie(string $key): void
     {
         if ($this->getCookieValue() === '' || $this->getCookieValue() === '0') {
             return;

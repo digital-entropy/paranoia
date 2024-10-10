@@ -12,13 +12,11 @@ use Illuminate\Http\Request;
 
 class IPChangeRestrictionMiddleware
 {
-    public function __construct(protected Paranoia $paranoia)
-    {
-    }
+    public function __construct(protected Paranoia $paranoia) {}
 
     public function handle(Request $request, \Closure $next): mixed
     {
-        if (!$this->paranoia->eligibleForIPRestriction()) {
+        if (! $this->paranoia->eligibleForIPRestriction()) {
             return $next($request);
         }
 
@@ -52,7 +50,7 @@ class IPChangeRestrictionMiddleware
 
     protected function validateCookieIp(Request $request): void
     {
-        if (!$this->paranoia->useCookieForIP()) {
+        if (! $this->paranoia->useCookieForIP()) {
             return;
         }
 

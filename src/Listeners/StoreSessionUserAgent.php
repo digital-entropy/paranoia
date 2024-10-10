@@ -19,7 +19,7 @@ class StoreSessionUserAgent
 
             if ($driver->useCookieForUserAgent()) {
                 $key = $event->user->getAuthIdentifier();
-                $driver->cookieLayer(CookieLayer::USER_AGENT)->setCookie($key);
+                $driver->cookieLayer(CookieLayer::USER_AGENT)->setCookie((string) $key);
             }
         }
     }

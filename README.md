@@ -2,14 +2,14 @@
     <h1 align="center">Paranoia</h1>
     <p align="center">HTTP Session Security for Laravel</p>
     <p align="center">
-        <a href="https://github.com/addeeandra/paranoia/actions">
-            <img alt="GitHub Workflow Status (main)" src="https://github.com/addeeandra/paranoia/actions/workflows/tests.yml/badge.svg"/>
+        <a href="https://github.com/dentro/paranoia/actions">
+            <img alt="GitHub Workflow Status (main)" src="https://github.com/dentro/paranoia/actions/workflows/tests.yml/badge.svg"/>
         </a>
-        <a href="https://packagist.org/packages/addeeandra/paranoia">
-            <img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/addeeandra/paranoia"/>
+        <a href="https://packagist.org/packages/dentro/paranoia">
+            <img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/dentro/paranoia"/>
         </a>
-        <a href="https://packagist.org/packages/addeeandra/paranoia">
-            <img alt="Total Downloads" src="https://img.shields.io/packagist/dt/addeeandra/paranoia"/>
+        <a href="https://packagist.org/packages/dentro/paranoia">
+            <img alt="Total Downloads" src="https://img.shields.io/packagist/dt/dentro/paranoia"/>
         </a>
     </p>
 </p>

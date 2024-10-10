@@ -61,21 +61,6 @@ on new IP. Please be aware that changing WiFi or Mobile Data can be detected as 
 \Dentro\Paranoia\Events\IPChangeDuringSessionViolationDetected::class
 ```
 
-## Locations Changes During Session Detection
-
-> [!NOTE]
-> Under active development.
-
-Allowing detection on location changes during a session. This middleware is suitable for hardening session's security
-after it being leaked. It can be used to preventing unauthorized access of a leaked session by detecting changes on
-suspicious new IP location.
-
-This feature minimize the **escalation** risk
-of [Session Hijacking Attack](https://owasp.org/www-community/attacks/Session_hijacking_attack).
-
-Check [OWASP AppSensor](https://owasp.org/www-project-appsensor/) at **SE5: Source Location Changes During Session** for
-more information.
-
 ## User-Agent Changes During Session Detection
 
 Allowing detection on user agent changes during a session. This middleware is the same as Location Changes Detection,
@@ -110,16 +95,14 @@ This utility prevents plain-text body submission.
 
 The middleware use `X-Form` header, decode `X-Form` as array, and convert the array as request's inputs.
 
-### X-Content-Digest as Secure Handshake
-
-> [!NOTE]
-> To be available.
-
-This utility allows secure communication handshake. The middleware use `X-Content-Digest` to validate request's
-integrity.
-
 ## Configuration
 
 ```dotenv
 IPINFO_TOKEN=your_ipinfo_token
 ```
+
+## Roadmap
+
+Our roadmap for more security features:
+
+- 

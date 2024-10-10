@@ -7,7 +7,7 @@ namespace Dentro\Paranoia\Providers;
 use Dentro\Paranoia\Listeners\StoreSessionIP;
 use Dentro\Paranoia\Listeners\StoreSessionUserAgent;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Events\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

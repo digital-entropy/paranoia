@@ -105,4 +105,5 @@ IPINFO_TOKEN=your_ipinfo_token
 
 Our roadmap for more security features:
 
-- 
+- Support more session drivers
+- Remove dependency to ipinfo.io
